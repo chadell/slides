@@ -16,7 +16,7 @@ $endfor$
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<link rel="stylesheet" href="css/reveal.min.css">
+<link rel="stylesheet" href="css/reveal.css">
 $if(theme)$
 <link rel="stylesheet" href="css/theme/$theme$.css" id="theme">
 $else$
@@ -80,7 +80,7 @@ $body$
 </div>
 
 <script src="lib/js/head.min.js"></script>
-<script src="js/reveal.min.js"></script>
+<script src="js/reveal.js"></script>
 
 <script>
 // Full list of configuration options available here:
