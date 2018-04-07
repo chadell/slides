@@ -1,7 +1,7 @@
 
 # Where are the actual the slides?
 
-docs/onenetwork
+docs/
 
 # How to regenerate the html version of the slides?
 
@@ -27,3 +27,5 @@ DEBUG: cmdline: pandoc -t html5 --template=reveal.js/reveal-template.html --self
 * but the default reveal template in pandoc is too simple...
 	* [https://gist.github.com/aaronwolen/5017084] included and improved with the comments
 
+
+> Special thanks to  [Daniel Caballero](https://github.com/dcaba) for creating so cool bash scripts to generate this slides :)

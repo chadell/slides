@@ -1,14 +1,12 @@
 
 # 
 
-## then, we build a network <span style="color:yellow">service</span> 👩🏻‍🔧
-
+## then, we built a network <span style="color:yellow">service</span> 👩🏻‍🔧
 <!-- 
 So, after the first try, we were ready to build something that could be useful for all the developers teams across Schibsted knowing some key things
  -->
 
 ## Developers 💛 being <span style="color:yellow">autonomous</span>
-
 <!-- Dynamic infrastructure has given developers the capabilities to become autonomous, so let's give them the same approach providing a self-serve API authtenticated through a SSO
  -->
 
@@ -35,6 +33,10 @@ So, after the first try, we were ready to build something that could be useful f
 
 ## New approach
 
+![](https://docs.google.com/drawings/d/e/2PACX-1vTM4bJPIbaTki9mkubRy8lcK8tUnsu-01rxHC2v4T-ds8usdEOQ5yV9CPCzDu8bffLJEX42VDNL3RTv/pub?w=806&h=527)
+
+## Underneath
+
 ![](https://docs.google.com/drawings/d/e/2PACX-1vSvNRJpmhIwaV2Uyubyq0MlOlw7ZfzpNvglQhu1txAtaAGgaVK1DSH6RKfUiIDpyz2mZ-V8OBZ6SGus/pub?w=1257&h=630)
 
 <!-- so the new approach was focus on the abstraction and orchestraction layer that could create internal provider network services and eventually provide a global interplatform connectivy -->
@@ -53,7 +55,7 @@ Running over dynamic infrastructure: autoescaling, SaaS (lb, dns, okta, email)
 How transit vpc should interact with the overall network
 Highlight connection approval process -->
 
-## Technology Stack
+<!-- ## Technology Stack
 
 | IaaS | PaaS | SaaS | FaaS |
 | :------: | :-------: | :-------: | :-------: |
@@ -65,14 +67,39 @@ Written in <span style="color:yellow">Python</span> 🐍 following 12-Factor APP
 ___
 | API | Worker | Scheduler |
 | :------: | :-------: |  :-------: | 
-| Swagger, NGINX, Gunicorn, Flask, SQLAlchemy | Providers' API wrapper | Lambda using Zappa |
+| Swagger, NGINX, Gunicorn, Flask, SQLAlchemy | Providers' API wrapper | Lambda using Zappa | -->
+
+## Written in <span style="color:yellow">Python</span> 🐍 following 12-Factor APP
+
+<!-- 
+I. Codebase
+One codebase tracked in revision control, many deploys
+II. Dependencies
+Explicitly declare and isolate dependencies
+III. Config
+Store config in the environment
+IV. Backing services
+Treat backing services as attached resources
+V. Build, release, run
+Strictly separate build and run stages
+VI. Processes
+Execute the app as one or more stateless processes
+VII. Port binding
+Export services via port binding
+VIII. Concurrency
+Scale out via the process model
+IX. Disposability
+Maximize robustness with fast startup and graceful shutdown
+X. Dev/prod parity
+Keep development, staging, and production as similar as possible
+XI. Logs
+Treat logs as event streams
+XII. Admin processes
+Run admin/management tasks as one-off processes
+ -->
 
 
-## CI / CD
-
-![](https://docs.google.com/drawings/d/e/2PACX-1vS9L84CCA2pvjaHRaKXP_AzVwk7yjXNCj2Fb7o9hFajis30Lo-kcQpNBT-VuToa8YNbFRKYyNhCbfuN/pub?w=1377&h=577)
-
-## <span style="color:yellow">Code</span> Snippets
+## some <span style="color:yellow">code</span> snippets
 
 ##
 ```python
@@ -119,4 +146,10 @@ def create(self):
         self._peering_id = response['VpcPeeringConnection']['VpcPeeringConnectionId']
         ...
 ```
+
+## CI / CD
+
+![](https://docs.google.com/drawings/d/e/2PACX-1vS9L84CCA2pvjaHRaKXP_AzVwk7yjXNCj2Fb7o9hFajis30Lo-kcQpNBT-VuToa8YNbFRKYyNhCbfuN/pub?w=1377&h=577)
+
+<!-- This is how we created this service, probably nothing different from your Pipelines, but the cool thing is imagine how this service could transform your current pipelines that probably can't interact with the network itself... using this you could include your network requirements in your integration and end2end test because eventually you will deploy them in production following the same tooling -->
 

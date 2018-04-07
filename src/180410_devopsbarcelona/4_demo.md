@@ -17,3 +17,7 @@
   <source src="media/video_3_vlc.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+
+<footer>
+[Video link in case the embedded one is not supported](https://github.com/chadell/slides/raw/master/src/180410_devopsbarcelona/media/video_3_vlc.mp4)
+</footer>

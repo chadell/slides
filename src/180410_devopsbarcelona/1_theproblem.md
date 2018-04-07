@@ -35,6 +35,7 @@ and all this services need to communicate...
 ##
 
 ![](https://docs.google.com/drawings/d/e/2PACX-1vRUX-foYcEbVO4d3slCY8Jwzk4OWYGnib6j0KbZzM7MtpPaFmrBUeZFevD4g70w0It_WwQw2Ww6afIL/pub?w=1262&h=642)
+
 <!-- 
 and you may end up with a caos like this... where several network technologies can be used for each use-cases and involving several team with several skills setting up this partial mesh network
  -->
@@ -43,6 +44,7 @@ and you may end up with a caos like this... where several network technologies c
 ## 
 
 ![](http://cdn.shopify.com/s/files/1/1061/1924/products/Flushed_Emoji_Icon_5e6ce936-4add-472b-96ba-9082998adcf7_grande.png?v=1513251036){ width=30% }
+
 <!-- 
 this could me my face when we thought about how to improve it :)
  -->

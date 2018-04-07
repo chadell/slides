@@ -30,7 +30,8 @@ So, what is this gonna be about?
 
 ##
 
-![](media/rfc_sr.png){ width=75% }
+![draft-ietf-6man-segment-routing-header-11](media/rfc_sr.png){ width=60% }
+
 <!-- 
 ... we could learn about some cool stuff about using Segment Routing with IPv6 to define network functions service chain...
 but don't worry!!! this talk is not about a specific network protocol and its headers...
@@ -39,12 +40,13 @@ even knowing this details is useful to improve our applications' performance
 
 ##
 
-![Source: Transforming the network with open SDN by BigSwitch](media/telnetssh.png)
+![Source: Transforming the network with open SDN by BigSwitch](https://2eof2j3oc7is20vt9q3g7tlo5xe-wpengine.netdna-ssl.com/wp-content/uploads/2014/07/big-switch-networks-telnet-ssh.jpg){ width=120% }
+
 <!-- 
 we could also talk about the "dramatic" improvement in network operations for the last 20 years (ironic)...
 -->
 
-## SDN, Network Programmability, Intent-based, NetOps? 🤔
+## SDN, NFV, Network Programmability, Intent-based, Open Networking, SD-WAN? 🤔
 
 <!-- 
 ... not joking, the networking area finally started moving to a devops approach and a lot of examples of automation is appearing these days. Here in Barcelona we are following in the "SDN and Network Programmability meetup" where you will be welcome.
