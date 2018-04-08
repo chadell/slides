@@ -4,7 +4,7 @@
 ## we tried to solve <span style="color:yellow">all in one</span>
 
 <!-- 
-so a small team of people with network background seated together to propose a better approach...
+so a small team of people with strong network background seated together to propose a better approach...
  -->
 
 ##
@@ -38,7 +38,7 @@ the approach was not what they expected because we were not solving their most u
 </footer>
 
 <!-- 
-please, listen carefully to your users! they are the ones who will give value to your services and do it often! a short feedback loop will avoid wasting time 
+please, listen carefully to your users! they are the ones who will give value to your services and do it often! a short feedback loop will avoid wasting time. Fast failure!
  -->
 
 ##

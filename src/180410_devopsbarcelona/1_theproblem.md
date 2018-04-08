@@ -9,7 +9,7 @@ Let's start first understanding what we were trying to solve.
 ## <span style="color:yellow">hybrid</span> ecosystem
 
 <!-- 
-Probably you are running workload in Public Cloud, but for business running for a while, usually hybrid approaches, part on-premises and part in the Cloud are teh natural transition.
+Probably you are running workload in Public Cloud, but for business running for a while, usually hybrid approaches, part on-premises and part in the Cloud are the natural transition.
 
 Dynamic infrastructure, or Cloud, has several benefits, and at some point several platforms will be used simultaneously to leverage on each one benefit
 
@@ -22,8 +22,8 @@ Poll:
 ![](https://docs.google.com/drawings/d/e/2PACX-1vSCKXAWWwSYY5CAZ1yzDfe8tR7XDdFXbU27kabGkDrAvrEVi18Cmu_flfSeEYatzrjSsUsyuDSKSZ1v/pub?w=1262&h=642)
 
 <!-- 
-Schibsted is also part of this group, with around 2000 developers distributed in 20 countries, we have a big diversity of IT platforms, on-premises and several public Clouds.
-So we end up with services distributed across many environments and the need to interconnecti them...
+Schibsted is also part of this group, distributed in 20 countries, and we still have a big diversity of IT platforms, on-premises and several public Clouds.
+So we end up with services distributed across many environments ...
 -->
 
 ## let's <span style="color:yellow">connect</span> them...

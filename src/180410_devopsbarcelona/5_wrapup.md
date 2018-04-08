@@ -6,10 +6,10 @@
 
 ## for <span style="color:yellow">software</span> engineers
 
-* <span style="color:yellow">Adopt</span> a network engineer 🤗
 * Don't underestimate the <span style="color:yellow">impact</span> of networking on your applications' performance
-* Require <span style="color:yellow">agility</span> from network services
-* Maximize DevOps benefits implies <span style="color:yellow">everyone</span>
+* Require <span style="color:yellow">agility</span> from network services 🤖
+* Maximize DevOps benefits requires <span style="color:yellow">everyone</span>
+* <span style="color:yellow">Adopt</span> a network engineer 🤗
 
 ## for <span style="color:yellow">network</span> engineers
 
@@ -19,15 +19,19 @@
 * There is a community(<span style="color:yellow">NetworkToCode</span>) out there, join it!  
 * <span style="color:yellow">Networking</span> is a key skill in IT, bring it <span style="color:yellow">close to the business</span>
 
+## and remember...
+
+##
+
+![](https://docs.google.com/drawings/d/e/2PACX-1vQFUkYeKAIZQLiCoPZ1AgPFKgtsjE_U7wipI5dbHvJYXqn3Ef2pL_ggfiUU3gu0QKpHU4MZTqdzsNjr/pub?w=1051&h=1079){ width=50% }
+
 ## <span style="color:yellow">Thanks</span> for your attention
 
 <h4 style="text-align: center;" markdown="1">
 @chadell0 ![](media/twitter-logo.png){ width=5% }
 </h4>
 
-
 ## Related material
-
 
 Slides: [https://chadell.github.io/slides/180410_devopsbarcelona](https://chadell.github.io/slides/180410_devopsbarcelona)
 Learning links: [https://github.com/chadell/learning](https://github.com/chadell/learning)

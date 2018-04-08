@@ -69,7 +69,7 @@ ___
 | :------: | :-------: |  :-------: | 
 | Swagger, NGINX, Gunicorn, Flask, SQLAlchemy | Providers' API wrapper | Lambda using Zappa | -->
 
-## Written in <span style="color:yellow">Python</span> 🐍 following 12-Factor APP
+## Written in <span style="color:yellow">Python</span> 🐍 following <span style="color:yellow">12-Factor App</span>
 
 <!-- 
 I. Codebase
@@ -151,5 +151,30 @@ def create(self):
 
 ![](https://docs.google.com/drawings/d/e/2PACX-1vS9L84CCA2pvjaHRaKXP_AzVwk7yjXNCj2Fb7o9hFajis30Lo-kcQpNBT-VuToa8YNbFRKYyNhCbfuN/pub?w=1377&h=577)
 
-<!-- This is how we created this service, probably nothing different from your Pipelines, but the cool thing is imagine how this service could transform your current pipelines that probably can't interact with the network itself... using this you could include your network requirements in your integration and end2end test because eventually you will deploy them in production following the same tooling -->
+<!-- This is how we created this service, probably nothing different from your Pipelines, but the cool thing is imagine how this service could transform your current pipelines that probably can't interact with the network itself... using this you could include your network requirements in your integration and end2end test because eventually you will deploy them in production following the same tooling 
+Run the acceptance test against your own actual infrastructure!
+-->
+
+## Platform as a Service
+
+```yaml
+version: 3
+replicas:
+  minimum: 2
+  maximum: 2
+ingress:
+  - host: ${INGRESS_DNS}
+metrics:
+  prometheus:
+    path: /prometheus
+resources:
+  limits:
+    memory: 1G
+    cpu: 1
+ports:
+  - port: 8080
+connectivity:
+  - serviceA
+  - serviceB
+```
 

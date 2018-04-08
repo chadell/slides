@@ -1,5 +1,5 @@
 
-# Where are the actual the slides?
+# Where are the actual slides?
 
 docs/
 
