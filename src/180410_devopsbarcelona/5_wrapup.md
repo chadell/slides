@@ -6,18 +6,26 @@
 
 ## for <span style="color:yellow">software</span> engineers
 
-* Don't underestimate the <span style="color:yellow">impact</span> of networking on your applications' performance
-* Require <span style="color:yellow">agility</span> from network services 🤖
-* Maximize DevOps benefits requires <span style="color:yellow">everyone</span>
-* <span style="color:yellow">Adopt</span> a network engineer 🤗
+[Don't underestimate the <span style="color:yellow">impact</span> of networking on your applications' performance]{.fragment}
+
+[Require <span style="color:yellow">agility</span> from network services 🤖]{.fragment}
+
+[Maximize DevOps benefits requires <span style="color:yellow">everyone</span>]{.fragment}
+
+[<span style="color:yellow">Adopt</span> a network engineer 🤗]{.fragment}
+
 
 ## for <span style="color:yellow">network</span> engineers
 
-* <span style="color:yellow">Don’t be afraid</span> of going out of your comfort zone 💪🏻
-* Learning coding will give you <span style="color:yellow">superpowers</span> 🙇🏻
-* Adopting a DevOps approach will <span style="color:yellow">speed up</span> your business (and career)
-* There is a community(<span style="color:yellow">NetworkToCode</span>) out there, join it!  
-* <span style="color:yellow">Networking</span> is a key skill in IT, bring it <span style="color:yellow">close to the business</span>
+[<span style="color:yellow">Don’t be afraid</span> of going out of your comfort zone 💪🏻]{.fragment}
+
+[Learning coding will give you <span style="color:yellow">superpowers</span> 🙇🏻]{.fragment}
+
+[Adopting a DevOps approach will <span style="color:yellow">speed up</span> your business (and career)]{.fragment}
+
+[There is a community(<span style="color:yellow">NetworkToCode</span>) out there, join it!]{.fragment}
+
+[<span style="color:yellow">Networking</span> is a key skill in IT, bring it <span style="color:yellow">close to the business</span>]{.fragment}
 
 ## and remember...
 

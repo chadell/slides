@@ -110,8 +110,8 @@ class Connection(object):
             try:
                 evaluator = ConnectionEvaluator.factory(connection)
                 connection['ctype'] = evaluator.evaluate()
-            except (VpcPeeringLimitReached, CIDROverlap):
-                raise ProcessConnectionUnrecoverableError
+            except (VpcPeeringLimitReached, CIDROverlap) as fe:
+                raise ProcessConnectionUnrecoverableError(fe)
 
         if connection['ctype'] == 'AWS_PEERING':
             return AWSPeeringConnection(connection)
@@ -129,10 +129,6 @@ class AWSPeeringConnection(Connection):
 ```python
 def create(self):
     try:
-        if self.peering_id is not None:
-            raise GSNVPCPeeringUnrecoverableError(
-                'An peering id {} should not be provided when creating a VPCPeering'.format(self.peering_id))
-
         if self._already_present():
             raise GSNVPCPeeringUnrecoverableError('VPC Peering betwen {} and {} already present'.format(
                 self.left_vpc.vpc_id, self.right_vpc.vpc_id))

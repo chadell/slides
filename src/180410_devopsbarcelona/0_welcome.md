@@ -67,11 +67,11 @@ In this presentation I will show you the process/decisions we took at Schibsted 
 
 
 <!-- Timings
-Welcome: 5, 4
-The Problem: 7, 5
-First try: 6, 5
-Service: 10, 13
-Demo: 8, 7
-Wrap-up: 4, 2
-Total: 40, 37
+Welcome: 5, 4           -> 0
+The Problem: 7, 5       -> 5
+First try: 6, 5         -> 12
+Service: 10, 13         -> 18
+Demo: 8, 7              -> 31
+Wrap-up: 4, 2           -> 38
+Total: 40, 37           -> 41
 -->
