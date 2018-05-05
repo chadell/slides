@@ -345,8 +345,11 @@ All you need is here:
 
 ## TODO
 
-* list of things
-* list of things
+From the mgmt server:
 
-
+1. Run the example playbook (exercise1.yml) against the targeted hosts (inventory.cfg)
+    * Analyse output and what the playbook is doing
+2. Update the hostname of all the devices to match the fqdn: router01, router02, switch, server, oob-switch
+    * Make a PR to the Github repository with your playbook (be aware of identifying yourself)
+3. Contribute to improve this workshop by fixing errors, typos or promoting improvements by PRs
 

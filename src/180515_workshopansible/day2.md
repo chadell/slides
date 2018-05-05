@@ -31,6 +31,8 @@
 
 Note: to find out the parameters of each module (plus some examples), you can use the <span style="color:lime">ansible-doc</span> utility: $ ansible-doc ios_config
 
+#
+
 ## Creating and using configuration templates
 
 1. Creating variable files
@@ -108,27 +110,171 @@ set snmp community {{ community.community }} authorization read-only
 {% endfor %}
 ```
 
-
 ## Generating network configuration files
+
+We will use the template module. It use the src parameter as the proper template to use and the dest paramter to point to the location where to store the rendered configuration (it assumes the folders already exist)
+
+```yaml
+---
+  - name: PLAY 1 - GENERATE SNMP CONFIGURATIONS
+    hosts: all
+    connection: local
+    gather_facts: no
+
+    tasks:
+      - name: GENERATE CONFIGS FOR EACH OS
+        template:
+          src: "./snmp/{{ os }}.j2"
+          dest: "./configs/snmp/{{ inventory_hostname }}.cfg
+```
+
+and run it!
+
+```bash
+$ ansible-playbook -i inventory.cfg snmp.yml
+```
+
+## What is os? and inventory_hostname?
+
+* os is a variable, so for each inventory element the task looks for the value of the os variable. It could be defined in specific files (as pointed out before), or in the inventory file with:
+```
+[eos]
+eos-spine1
+eos-spine2
+
+[eos:vars]
+os=eos
+```
+
+* inventory_hostname is just the name of the network device from the inventory file
+
+#
 
 ## Ensuring a configuration exists
 
-1. Idempotency
+1. Idempotency: make the change only when it's needed, so if you run the playbook twice without changes, it will have effect the first time
 2. Using the config module
 3. Understanding check mode, verbosity and limit
 
+## Using the config module
+
+Let's use the eos_config module to deploy the SNMP configuration from previous example
+
+```yaml
+  - name: PLAY 2 - ENSURE EOS SNMP CONFIGS ARE DEPLOYED
+    hosts: eos
+    connection: local
+    gather_facts: no
+
+    tasks:
+      - name: DEPLOY CONFIGS FOR EOS
+        eos_config:
+          src: "./configs/snmp/{{ inventory_hostname }}.cfg"
+          provider: "{{ base_provider }}"
+```
+
+Notes:
+1. This could be the second task of the previous example (we are using the output file as src)
+2. We are running agains a subset of hosts (eos), and using their specific module (eos_config)
+3. We are using as provider (access credentials) an object defined as a variable for all the devices, such as:
+
+```yaml
+base_provider:
+  username: vagrant
+  password: vagrant
+  host: "{{ inventory_hostname }}
+```
+
+## Other options/parameters for config module
+
+* commands, instead of using src (a file), we could embed a list of commands to be executed in the network device
+* parents, needed when we are working with nested configuration, for instance an interface mode, we reference these dependencies
+* other specific parameters, check them using ansible-doc
+
+## Understanding check mode, verbosity and limit
+
+* Check mode, is the ability to run playbooks in "dry run" mode, the ability of knowing if changes will occur. Use it by enabling the --check when executing the playbook
+* Verbosity, eveyr module returns JSON data with metadata of the comanand and the respone from the device. Use it by enabling the -v flag when running the playbook.
+* Limit, usually you define the hosts to run the playbook against is the hosts paramters, but you can be more concrete by using the --limit option and a list of the groups from the inventory
+
+#
+
 ## Gathering and viewing network data
 
-1. Using the core facts modules
-2. Using the debug module
+Even Ansible is used often to deploy configurations it also makes possible to automate the collection of data from network devices.
+
+In this part we will analyse two key methods for gathering data:
+* core facts modules
+* arbitrary show commands with the command module
+
+## Using the core facts modules
+
+The core facts modules return the following data as JSON (so it could be used in the playbook!):
+
+| Core facts modules | Result |
+| --- | --- |
+| ansible_net_model | The model name returned from the device |
+| ansible_net_serialnum | The serial number of the remote device |
+| ansible_net_version | The operation system version running on the remote device |
+| ansible_net_hostname | The configured hostname of the device |
+| ansible_net_config | The current active config from the device |
+| ansible_net_interfaces | A hash of all interfaces running on the system |
+| ansible_net_neighbors | The list of the LLDP neighbors form the remote device |
+
+
+## Get fact from network devices
+
+Even by default the gather_facts provides all this information, in network devices that don't let remote python code execution (non Linux based NOS), we have to use specific modules (i.e. ios_facts:
+
+```yaml
+---
+  - name: PLAY 1 - COLLECT FACTS FOR IOS
+    hosts: iosxe
+    connection: local
+    gather_facts: no
+
+    tasks:
+      - name: COLLECT FACTS FOR IOS
+        ios_facts:
+          provider: "{{ base_provider }}
+```
+
+## Using the debug module
+
+In order to view the facts that are being returned from the module you can run the playbook in verbose mode or simply yse the debug module with the var parameter while referencing a valid facts key:
+
+```yaml
+# play definition omitted
+  tasks:
+    - name: COLLECT FACTS FROM IOS
+      ios_facts:
+        provider: "{{ base_provider }}"
+    
+    - name: DEBUG OS VERSION
+      debug:
+        var: ansible_net version
+    
+    - name: DEBUG HOSTNAME
+      debug:
+        var: ansible_net_hostname
+```
+
+
+#
 
 ## Issuing show commands and writing data to a file
 
 1. Using the register task attribute
 
+#
+
 ## Performing compliance checks
 
+#
+
 ## Generating reports
+
+#
 
 ## Using 3rd-party Ansible modules
 
