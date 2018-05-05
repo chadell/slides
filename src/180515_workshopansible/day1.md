@@ -232,12 +232,21 @@ vlan 345
     * Runs python code locally and reach network devices by SNMP, SSH or APIs
 
 ## Basic files and defaults
-    * Playbook
-    * Inventory
+
+* Inventory file: Contains the devices (ip or fqdn) that will be automated (and associated variables)
+    * /etc/ansible/hosts
+    * ANSIBLE_INVENTORY
+    * -i, --inventory-file
+
+* Variable files:
+    * Group variables
+        * **group_vars**/{name of group}.yml or
+        * **group_vars**/{name of group}/{variables}.yml
+    * Host variables
+        * **host_vars**/{name of group}.yml or
+        * **host_vars**/{name of group}/{variables}.yml
 
 ## Inventory file
-
-Contains the devices (ip or fqdn) that will be automated, and the associated variables
 
 ```
 [barcelona-dc]
@@ -277,6 +286,22 @@ or
 switch01 ntp_server=192.168.0.3
 switch02
 ```
+## Variables' file
+
+File: group_vars/barcelona-dc.yml
+
+```yaml
+---
+snmp:
+    contact: Ausias March
+    location: Barcelona Data Center, Passeig Colon
+    communities:
+        - community: public
+          type: ro
+        - community: private
+          type: rw
+```
+
 
 ## Executing an Ansible Playbook
 
