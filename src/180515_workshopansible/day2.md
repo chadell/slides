@@ -137,6 +137,7 @@ $ ansible-playbook -i inventory.cfg snmp.yml
 ## What is os? and inventory_hostname?
 
 * os is a variable, so for each inventory element the task looks for the value of the os variable. It could be defined in specific files (as pointed out before), or in the inventory file with:
+
 ```
 [eos]
 eos-spine1
@@ -262,28 +263,124 @@ In order to view the facts that are being returned from the module you can run t
 
 #
 
-## Issuing show commands and writing data to a file
+## Using data from responses (register)
 
-1. Using the register task attribute
+To get the return data (JSON) from a module you can use the verbose mode
+
+But there is also another way, using the register task attribute, which allows you to save the JSON response data as a variable
+
+```yaml
+  - name: ISSUE SHOW COMMAND
+    ios_command:
+      command:
+        - show run | include snmp-server community
+      provider: "{{ base_provider }}"
+    register: snmp_data
+```
+The register's associated value is the variable you want to save the data in
+
+##  How to access returned data
+
+Since the snmp_data variable is now created (or registered), the debug module can be used to view the data. After viewing it, you need to understand the data structure to use it, even you could get it from the ansible-doc help.
+
+```yaml
+  - name: DEBUG COMMAND STRING RESPONSE WITH JINJA SHORTHAND SYNTAX
+    debug:
+      var: snmp_data.stdout.0
+
+  - name: DEBUG COMMAND STRING RESPONSE WITH STANDARD PYTHON SYNTAX
+    debug:
+      var: snmp_data['stdout'][0]
+```
+
+or just use it with templates as {{ snmp_data['stdout'][0] }}
 
 #
 
 ## Performing compliance checks
 
+* set_fact: it's a module that creates a variable out of some other complex set of data. 
+* assert: it's a module to ensure that a condition is True of False
+
+```yaml
+  tasks:
+    - name: RETRIEVE VLANS JSON RESPONSE
+      eos_command:
+        commands:
+          - show vlan brief | json
+        provider: "{{ base_provider}}"
+      register: vlan_data
+
+    - name: DEBUG VLANS AS JSON
+      debug:
+        var: vlan_data
+
+    - name: CREATE EXISTING_VLANS FACT TO SIMPLIFY ACCESSING VLANS
+      set_fact:
+        existing_vlans_ids: "{{ vlan_data.stdout.0.vlans.keys() }}"
+
+    - name: PERFORM COMPLIANCE CHECKS
+      assert:
+        that:
+          - "'20' in existing_vlans_ids"
+      
+```
+
 #
 
 ## Generating reports
+
+* assemble: it's a module that assembles all the individual reports into a single master report
+  * delimiter: useful to split partial outputs
+
+```yaml
+- name: PLAY CREATE REPORTS
+  hosts: "iosxe,eos,nxos"
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: GENERATE DEVICE SPECIFIC REPORTS
+      template:
+        src: ./reports/facts.j2
+        dest: ./reports/facts/{{ inventory_hostname }}.md
+
+    - name: CREATE MASTER REPORT
+      assemble:
+        src: ./reports/facts/
+        dest: ./reports/master-report.md
+        delimiter: "---"
+      run_once: true
+```
 
 #
 
 ## Using 3rd-party Ansible modules
 
+All of the examples we've reviewd in this chapter have used Ansible core modules (included in Ansible installation)
+However, there is an active community for 3rd-party modules.
+
+## NAPALM 
+
+NAPALM: Network Automation and Programmability Abstraction Layer with Multi-vendor support is an open source community developing mutli-vendor network automation integrations
+
+![](https://raw.githubusercontent.com/napalm-automation/napalm/develop/static/logo.png)
+
 ## NAPALM modules
+
+* Declarative configuration management (napalm_install_config): NAPALM focuses on the desired state configuration. You deploy the new configuration (no commands) and NAPALM abstracts away how this operates per vendor and makes it so you don't have to micromanage device configurations.
+
+* Obtaining configuration and operational state from devices: The module napalm_get_facts is used to obtain a base set of facts and other information (usch as route entries, MAC table, etc.). The big benefit is that it the data is preparsed and normalised for all vendors supported.
 
 ## Bring your own module
 
-* Installing 3rd party modules
+Installing 3rd party modules is quite straightforward:
 
+1. Choose a path on your Linux system where you want to store all your 3rd party modules
+2. Navigate to that path and perform a git clone on each repository that you want to use
+3. Open your Ansbile config file (/etc/ansible/ansible.cfg) and update your module path with the chosen directory
+  * You can locate this file running ansible --version
+4. Install any dependencies the modules have (this are usually documented on the project's GitHub)
 
 #
 
@@ -302,6 +399,13 @@ All you need is here:
 
 ## TODO
 
-* list of things
-* list of things
+1. Create a network design:
+
+  * A vlan between router01 and router02 and configure iBGP (create all the necessary config)
+  * A vlan to communicate router01, router02 and the server
+  * A validation that the design is deployed
+  * A report with all the configs applied to router01, router02 and switch
+  * Make a PR to the Github repository with your playbook (be aware of identifying yourself)
+  
+2. Contribute to improve this workshop by fixing errors, typos or promoting improvements by PRs
 
