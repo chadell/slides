@@ -4,7 +4,7 @@
 
 exec_root_dir=$(dirname "$0")/..
 paths_to_process="src/*/"
-theme=black
+theme=simple
 format="html5 --template=reveal.js/reveal-template.html"
 output_dir="docs/"
 
