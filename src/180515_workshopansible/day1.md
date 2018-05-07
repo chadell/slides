@@ -1,4 +1,4 @@
-% Network Programmability and <span style="color:lime">Automation </span>101
+% Network <span style="color:SlateBlue">Automation </span>101
 % Enginyeria La Salle, May 18
 % Christian Adell @chadell0 ![](media/twitter-logo.png){ width=5% }
 
@@ -8,13 +8,13 @@
 
 | Time | Topic |
 | --- | --- |
-| <span style="color:lime">Day 1</span> |  |
+| <span style="color:SlateBlue">Day 1</span> |  |
 | 15:30 - 16:00 | Network Programmability & Automation |
 | 16:00 - 16:30 | Ansible 101 |
-| 16:30 - 17:00 | <span style="color:lime">Exercise 1</span> |
-| <span style="color:lime">Day 2</span> |  |
+| 16:30 - 17:00 | <span style="color:SlateBlue">Exercise 1</span> |
+| <span style="color:SlateBlue">Day 2</span> |  |
 | 15:30 - 16:00 | Ansible 102 |
-| 16:00 - 17:00 | <span style="color:lime">Exercise 2</span> |
+| 16:00 - 17:00 | <span style="color:SlateBlue">Exercise 2</span> |
 
 #
 
@@ -22,7 +22,7 @@
 
 # 
 
-## Network Programmability and Automation 101
+## Network Programmability and Automation
 
 ## What is Software Defined Networking?
 
@@ -34,11 +34,11 @@
 
 ## Network Functions Virtualization
 
-![](http://www.techplayon.com/wp-content/uploads/2017/08/NFV-Comp.png)
+![](http://www.techplayon.com/wp-content/uploads/2017/08/NFV-Comp.png){ width=75% }
 
 ## Virtual switching
 
-![](http://network-insight.net/wp-content/uploads/2015/11/OVS-COMP.jpg)
+![](http://network-insight.net/wp-content/uploads/2015/11/OVS-COMP.jpg){ width=75% }
 
 ## Network virtualization
 
@@ -66,11 +66,11 @@
 
 ## Controller networking
 
-![](https://www.sdxcentral.com/wp-content/uploads/2014/09/ODL-graphic-copy.jpg)
+![](https://www.sdxcentral.com/wp-content/uploads/2014/09/ODL-graphic-copy.jpg){ width=65% }
 
 #
 
-## Network <span style="color:lime">Automation</span>
+## Network <span style="color:SlateBlue">Automation</span>
 
 ## Why
 
@@ -176,12 +176,6 @@ parameter_defaults:
         type ipv4addr;
         mandatory true;
       }
-      presence "enable backup-router";
-      leaf-list destination {
-        description "Destination network reachable through the router";
-        type ipv4prefix;
-      }
-    }
     ...
 ```
 [https://raw.githubusercontent.com/Juniper/yang/master/14.2/configuration.yang](https://raw.githubusercontent.com/Juniper/yang/master/14.2/configuration.yang)
@@ -195,7 +189,10 @@ vlan {{ key }}
 ```
 
 ```python
->>> vlanDict = {123: 'TEST-VLAN-123', 234: 'TEST-VLAN-234', 345: 'TEST-VLAN-345'}
+>>> vlanDict = { 
+>>>     123: 'TEST-VLAN-123', 
+>>>     234: 'TEST-VLAN-234', 
+>>>     345: 'TEST-VLAN-345'}
 >>> from jinja2 import Environment
 >>> env = Environment(loader=FileSystemLoader('./Templates/'))
 >>> template = env.get_template('ourtemplate')
@@ -211,7 +208,7 @@ vlan 345
 
 # 
 
-## <span style="color:lime">Ansible</span> 101
+## <span style="color:SlateBlue">Ansible</span> 101
 
 ## Review of automation tools
 
@@ -279,9 +276,7 @@ ntp_server=192.168.0.1
 
 [madrid:vars]
 ntp_server=10.0.0.1
-```
-or
-```
+
 [barcelona-dc]
 switch01 ntp_server=192.168.0.3
 switch02

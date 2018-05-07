@@ -1,24 +1,22 @@
 #
 
+## Day 2
+
 ## Agenda
 
 | Time | Topic |
 | --- | --- |
-| <span style="color:lime">Day 1</span> |  |
+| <span style="color:SlateBlue">Day 1</span> |  |
 | 15:30 - 16:00 | Network Programmability & Automation |
 | 16:00 - 16:30 | Ansible 101 |
-| 16:30 - 17:00 | <span style="color:lime">Exercise 1</span> |
-| <span style="color:lime">Day 2</span> |  |
+| 16:30 - 17:00 | <span style="color:SlateBlue">Exercise 1</span> |
+| <span style="color:SlateBlue">Day 2</span> |  |
 | 15:30 - 16:00 | Ansible 102 |
-| 16:00 - 17:00 | <span style="color:lime">Exercise 2</span> |
-
-# 
-
-## Day 2
+| 16:00 - 17:00 | <span style="color:SlateBlue">Exercise 2</span> |
 
 #
 
-## Writing Ansible Playbooks
+## Ansible 102
 
 ## Core modules
 
@@ -29,7 +27,7 @@
 * facts: used to gather information from network devices
     * ios_facts, vyos_facts, junos_facts, and so on
 
-Note: to find out the parameters of each module (plus some examples), you can use the <span style="color:lime">ansible-doc</span> utility: $ ansible-doc ios_config
+Note: to find out the parameters of each module (plus some examples), you can use the <span style="color:SlateBlue">ansible-doc</span> utility: $ ansible-doc ios_config
 
 #
 
@@ -110,22 +108,17 @@ set snmp community {{ community.community }} authorization read-only
 {% endfor %}
 ```
 
-## Generating network configuration files
+## Generating network configuration files (1)
 
 We will use the template module. It use the src parameter as the proper template to use and the dest paramter to point to the location where to store the rendered configuration (it assumes the folders already exist)
 
 ```yaml
----
-  - name: PLAY 1 - GENERATE SNMP CONFIGURATIONS
-    hosts: all
-    connection: local
-    gather_facts: no
-
-    tasks:
-      - name: GENERATE CONFIGS FOR EACH OS
-        template:
-          src: "./snmp/{{ os }}.j2"
-          dest: "./configs/snmp/{{ inventory_hostname }}.cfg
+# play definition omitted
+tasks:
+  - name: GENERATE CONFIGS FOR EACH OS
+    template:
+      src: "./snmp/{{ os }}.j2"
+      dest: "./configs/snmp/{{ inventory_hostname }}.cfg
 ```
 
 and run it!
@@ -134,7 +127,9 @@ and run it!
 $ ansible-playbook -i inventory.cfg snmp.yml
 ```
 
-## What is os? and inventory_hostname?
+## Generating network configuration files (2)
+
+What is os? and inventory_hostname?
 
 * os is a variable, so for each inventory element the task looks for the value of the os variable. It could be defined in specific files (as pointed out before), or in the inventory file with:
 
@@ -157,7 +152,7 @@ os=eos
 2. Using the config module
 3. Understanding check mode, verbosity and limit
 
-## Using the config module
+## Using the config module (1)
 
 Let's use the eos_config module to deploy the SNMP configuration from previous example
 
@@ -174,7 +169,10 @@ Let's use the eos_config module to deploy the SNMP configuration from previous e
           provider: "{{ base_provider }}"
 ```
 
+## Using the config module (2)
+
 Notes:
+
 1. This could be the second task of the previous example (we are using the output file as src)
 2. We are running agains a subset of hosts (eos), and using their specific module (eos_config)
 3. We are using as provider (access credentials) an object defined as a variable for all the devices, such as:
@@ -188,15 +186,15 @@ base_provider:
 
 ## Other options/parameters for config module
 
-* commands, instead of using src (a file), we could embed a list of commands to be executed in the network device
-* parents, needed when we are working with nested configuration, for instance an interface mode, we reference these dependencies
-* other specific parameters, check them using ansible-doc
+* **commands**, instead of using src (a file), we could embed a list of commands to be executed in the network device
+* **parents**, needed when we are working with nested configuration, for instance an interface mode, we reference these dependencies
+* other specific parameters, check them using **ansible-doc**
 
 ## Understanding check mode, verbosity and limit
 
-* Check mode, is the ability to run playbooks in "dry run" mode, the ability of knowing if changes will occur. Use it by enabling the --check when executing the playbook
-* Verbosity, eveyr module returns JSON data with metadata of the comanand and the respone from the device. Use it by enabling the -v flag when running the playbook.
-* Limit, usually you define the hosts to run the playbook against is the hosts paramters, but you can be more concrete by using the --limit option and a list of the groups from the inventory
+* **Check mode**, is the ability to run playbooks in "dry run" mode, the ability of knowing if changes will occur. Use it by enabling the --check when executing the playbook
+* **Verbosity**, every module returns JSON data with metadata of the comanand and the respone from the device. Use it by enabling the -v flag when running the playbook.
+* **Limit**, usually you define the hosts to run the playbook against is the hosts paramters, but you can be more concrete by using the --limit option and a list of the groups from the inventory
 
 #
 
@@ -205,6 +203,7 @@ base_provider:
 Even Ansible is used often to deploy configurations it also makes possible to automate the collection of data from network devices.
 
 In this part we will analyse two key methods for gathering data:
+
 * core facts modules
 * arbitrary show commands with the command module
 
@@ -214,13 +213,10 @@ The core facts modules return the following data as JSON (so it could be used in
 
 | Core facts modules | Result |
 | --- | --- |
-| ansible_net_model | The model name returned from the device |
-| ansible_net_serialnum | The serial number of the remote device |
 | ansible_net_version | The operation system version running on the remote device |
 | ansible_net_hostname | The configured hostname of the device |
 | ansible_net_config | The current active config from the device |
 | ansible_net_interfaces | A hash of all interfaces running on the system |
-| ansible_net_neighbors | The list of the LLDP neighbors form the remote device |
 
 
 ## Get fact from network devices
@@ -260,14 +256,13 @@ In order to view the facts that are being returned from the module you can run t
         var: ansible_net_hostname
 ```
 
-
 #
 
-## Using data from responses (register)
+## Using data from responses
 
 To get the return data (JSON) from a module you can use the verbose mode
 
-But there is also another way, using the register task attribute, which allows you to save the JSON response data as a variable
+But there is also another way, using the **register** task attribute, which allows you to save the JSON response data as a variable
 
 ```yaml
   - name: ISSUE SHOW COMMAND
@@ -279,7 +274,7 @@ But there is also another way, using the register task attribute, which allows y
 ```
 The register's associated value is the variable you want to save the data in
 
-##  How to access returned data
+##  Access returned data
 
 Since the snmp_data variable is now created (or registered), the debug module can be used to view the data. After viewing it, you need to understand the data structure to use it, even you could get it from the ansible-doc help.
 
@@ -297,10 +292,10 @@ or just use it with templates as {{ snmp_data['stdout'][0] }}
 
 #
 
-## Performing compliance checks
+## Compliance checks
 
-* set_fact: it's a module that creates a variable out of some other complex set of data. 
-* assert: it's a module to ensure that a condition is True of False
+* **set_fact**: it's a module that creates a variable out of some other complex set of data. 
+* **assert**: it's a module to ensure that a condition is True of False
 
 ```yaml
   tasks:
@@ -311,10 +306,6 @@ or just use it with templates as {{ snmp_data['stdout'][0] }}
         provider: "{{ base_provider}}"
       register: vlan_data
 
-    - name: DEBUG VLANS AS JSON
-      debug:
-        var: vlan_data
-
     - name: CREATE EXISTING_VLANS FACT TO SIMPLIFY ACCESSING VLANS
       set_fact:
         existing_vlans_ids: "{{ vlan_data.stdout.0.vlans.keys() }}"
@@ -323,15 +314,14 @@ or just use it with templates as {{ snmp_data['stdout'][0] }}
       assert:
         that:
           - "'20' in existing_vlans_ids"
-      
 ```
 
 #
 
 ## Generating reports
 
-* assemble: it's a module that assembles all the individual reports into a single master report
-  * delimiter: useful to split partial outputs
+* **assemble**: it's a module that assembles all the individual reports into a single master report
+  * **delimiter**: useful to split partial outputs
 
 ```yaml
 - name: PLAY CREATE REPORTS
@@ -362,7 +352,7 @@ However, there is an active community for 3rd-party modules.
 
 ## NAPALM 
 
-NAPALM: Network Automation and Programmability Abstraction Layer with Multi-vendor support is an open source community developing mutli-vendor network automation integrations
+Network Automation and Programmability Abstraction Layer with Multi-vendor support is an open source community developing mutli-vendor network automation integrations
 
 ![](https://raw.githubusercontent.com/napalm-automation/napalm/develop/static/logo.png)
 
@@ -400,12 +390,10 @@ All you need is here:
 ## TODO
 
 1. Create a network design:
-
   * A vlan between router01 and router02 and configure iBGP (create all the necessary config)
   * A vlan to communicate router01, router02 and the server
   * A validation that the design is deployed
   * A report with all the configs applied to router01, router02 and switch
   * Make a PR to the Github repository with your playbook (be aware of identifying yourself)
-  
 2. Contribute to improve this workshop by fixing errors, typos or promoting improvements by PRs
 
