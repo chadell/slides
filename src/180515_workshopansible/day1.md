@@ -8,13 +8,13 @@
 
 | Time | Topic |
 | --- | --- |
-| <span style="color:SlateBlue">Day 1</span> |  |
+| <span style="color:SlateBlue">**Day 1**</span> |  |
 | 15:30 - 16:00 | Network Programmability & Automation |
 | 16:00 - 16:30 | Ansible 101 |
-| 16:30 - 17:00 | <span style="color:SlateBlue">Exercise 1</span> |
-| <span style="color:SlateBlue">Day 2</span> |  |
+| 16:30 - 17:00 | <span style="color:SlateBlue">**Exercise 1**</span> |
+| <span style="color:SlateBlue">**Day 2**</span> |  |
 | 15:30 - 16:00 | Ansible 102 |
-| 16:00 - 17:00 | <span style="color:SlateBlue">Exercise 2</span> |
+| 16:00 - 17:00 | <span style="color:SlateBlue">**Exercise 2**</span> |
 
 #
 
@@ -34,11 +34,12 @@
 
 ##
 
-* It was the PhD work of Martin Casado as Stanford University, supervised by Nick McKeown
-* OpenFlow could be considered as the trigger of SDN, as an answer to the limitations Martin Casado found when working on trying to pgrogram the network as he was doing with computers
-* For almost 20 years, Network opertations had not evolved like other IT silos
-* but, in the end, it's just a protocol taht allows for the decoupling of a network device's control plane from the data plane
-    * and it was not the first trying to accomplish this, i.e. ForCes, RCP, PCE. For more information look for the paper "The Road to SDN: An Intellectual History of Programmable Networks"
+* It was the PhD work of <span style="color:SlateBlue">**Martin Casado**</span> at Stanford University, supervised by Nick McKeown
+* OpenFlow could be considered as the trigger of SDN, when he was trying to <span style="color:SlateBlue">**program**</span> the network as he was doing with computers
+    * for almost 20 years, network opertations had not evolved like other IT silos
+* but, in the end, it's just a <span style="color:SlateBlue">**protocol**</span> that allows for the decoupling of a network device's control plane from the data plane
+    * and it was not the first trying to accomplish this, i.e. ForCes, RCP, PCE. 
+    * For more information look for the paper "The Road to SDN: An Intellectual History of Programmable Networks"
 
 ## Network Functions Virtualization
 
@@ -47,11 +48,12 @@
 ##
 
 * It consists on taking functions that have been deployed as hardward, and instead deploying them as software
-* It enables breaking fow a monolithic piece of HW into *N* pieces of software
-* It offers a better way to scale out and minimize failure domains using a pay-as-yo-grow model
-* But, it needs a rethink on how the network is architected (traffic doesn't need to go through a specific device) and give up the current single pane of management (CLI or GUI)
-* Also, some vendors, are not actively selling their virtual appliances...
-* Agility is one of the major values, decreasing time to provision of new services and adopt DevOps culture
+* It enables breaking down a monolithic piece of HW into *N* pieces of software
+* It offers a better way to <span style="color:SlateBlue">**scale out**</span> and minimize failure domains using a pay-as-yo-grow model
+* But...
+    * it needs a rethink on how the network is architected (traffic doesn't need to go through a specific device) and give up the current single pane of management (CLI or GUI)
+    * Also, some vendors, are not actively selling their virtual appliances...
+* <span style="color:SlateBlue">**Agility**</span> is one of the major values, decreasing time to provision of new services and adopting DevOps culture
 
 ## Virtual switching
 
@@ -59,8 +61,8 @@
 
 ##
 
-* These are just software-based switches in the hypervisor level providing local conectivity between VM and Containers
-* They are the new edge layer of the network, instead of the Top of the Rack switches (TOR) 
+* These are just software-based switches in the <span style="color:SlateBlue">**hypervisor**</span> level providing local conectivity between VMs and Containers
+* They are the new <span style="color:SlateBlue">**edge layer**</span> of the network, instead of the Top of the Rack switches (TOR) 
 * Examples:
     * VMware standard switch (VSS)
     * VMware distributed switch (VDS)
@@ -74,8 +76,8 @@
 
 ##
 
-* It's just providing an overlay network (Layer 2) using protocols as VxLAN or EVPN
-* So, the result is a virtual network decoupled from the physical network
+* It's just providing an <span style="color:SlateBlue">**overlay**</span> network (Layer 2) using protocols such as VxLAN or EVPN
+* So, the result is a virtual network <span style="color:SlateBlue">**decoupled**</span> from the physical network
 * Usually, these solutions offers extra services controlled from a a single point of management
 * Examples:
     * VMware NSX
@@ -90,7 +92,7 @@
 
 * CLI, repeat with me, CLI, CLI...
 * CLI, or GUI, are not well suited for automation because they don't offer structured data
-* API (Application Programmable Interface) offers a clean interface to operate with network devices
+* API (Application Programmable Interface) offers a clean <span style="color:SlateBlue">**interface**</span> to operate with network devices
 * Examples:
     * RESTful APIs
     * NETCONF
@@ -103,8 +105,8 @@
 ##
 
 * APIs facilitates Network Automation
-* It's extremely easy to retrieve network information (structured) and deploy configuration **at scale**
-* It allow a more predictable and uniform network
+* It's extremely easy to retrieve network information (structured) and deploy configuration <span style="color:SlateBlue">**at scale**</span>
+* It allows a more predictable and uniform network
 * Some examples:
     * Custom Python scripts
     * Ansible
@@ -118,7 +120,7 @@
 ## 
 
 * Network devices were always bought as hardware appliance, operating system, applications from the same vendor
-* Now, the bare-mteal switching is about disaggreagtion and being able to purchase every piece from different vendors
+* Now, the bare-metal switching is about <span style="color:SlateBlue">**disaggregation**</span> and being able to purchase every piece from different vendors
 * Examples of hardware boxes:
     * HP
     * Dell
@@ -135,7 +137,7 @@
 
 ##
 
-* Network architecture have evolved to standarized blocks
+* Network architecture have evolved to <span style="color:SlateBlue">**standarized blocks**</span>
 * We changed from managing individual boxes to managing a system, offering a single interface
 * This solutions offer distributed gateways, multi-path and some form of "logic"
 * Examples:
@@ -148,7 +150,7 @@
 
 ##
 
-* It democratises WAN connections, being able to create private WAN services over multiple technologies (not only MPLS)
+* It democratises WAN connections, being able to create private WAN services over <span style="color:SlateBlue">**multiple technologies and providers**</span>
 * It's conceptually similar to overlay networks, making provision quicker and also more agile
 * Examples:
     * Viptela, now Cisco
@@ -161,7 +163,7 @@
 
 ##
 
-* In some of the previous solutions, they rely on a central point of control that orchestrates everything
+* In some of the previous solutions, they rely on a central point of control that <span style="color:SlateBlue">**orchestrates**</span> everything
 * These platforms offer:
     * Network Virtualization
     * Monitoring 
@@ -171,7 +173,7 @@
 
 #
 
-## Network <span style="color:SlateBlue">Automation</span>
+## Network <span style="color:SlateBlue">**Automation**</span>
 
 ## Why
 
@@ -179,7 +181,7 @@
 * Deterministic Outcomes
 * Business Agility
 
-## Types
+## Some examples
 
 * Device Provisioning
 * Data Collection
@@ -303,7 +305,7 @@ vlan 345
 
 # 
 
-## <span style="color:SlateBlue">Ansible</span> 101
+## <span style="color:SlateBlue">**Ansible**</span> 101
 
 ## Review of automation tools
 
@@ -317,20 +319,20 @@ vlan 345
 
 * Automating servers
     * Distributed execution
-    * Copy via SSH python code and runs in every device
+    * <span style="color:SlateBlue">**Copy**</span> via SSH python code and <span style="color:SlateBlue">**runs**</span> in every device
 
 * Automating network devices
     * Centralised execution
-    * Runs python code locally and reach network devices by SNMP, SSH or APIs
+    * <span style="color:SlateBlue">**Runs**</span> python code locally and reach network devices by SNMP, SSH or APIs
 
 ## Basic files and defaults
 
-* Inventory file: Contains the devices (ip or fqdn) that will be automated (and associated variables)
-    * /etc/ansible/hosts
+* <span style="color:SlateBlue">**Inventory**</span> file: Contains the devices (ip or fqdn) that will be automated (and associated variables)
+    * **/etc/ansible/hosts**
     * ANSIBLE_INVENTORY
     * -i, --inventory-file
 
-* Variable files:
+* <span style="color:SlateBlue">**Variable**</span> files:
     * Group variables
         * **group_vars**/{name of group}.yml or
         * **group_vars**/{name of group}/{variables}.yml
@@ -378,7 +380,7 @@ switch02
 ```
 ## Variables' file
 
-File: group_vars/barcelona-dc.yml
+File: group_vars/**barcelona-dc**.yml
 
 ```yaml
 ---
@@ -392,6 +394,7 @@ snmp:
           type: rw
 ```
 
+How will we access this data?: *snmp.communitites[0].type*
 
 ## Executing an Ansible Playbook
 
@@ -421,9 +424,10 @@ It's the file that contain your automation instructions
 
 ## Exercise 1
 
+
 ## Goal
 
-> Experiment with basic Ansible automation
+> Experiment with basic Ansible automation, *learning by doing*
 
 All you need is here: 
 [https://github.com/chadell/ansible-cumulus-vyos](https://github.com/chadell/ansible-cumulus-vyos)
@@ -435,11 +439,11 @@ All you need is here:
 
 ## TODO
 
-From the mgmt server:
+From the <span style="color:SlateBlue">**mgmt**</span> server:
 
 1. Run the example playbook (exercise1.yml) against the targeted hosts (inventory.cfg)
-    * Analyse output and what the playbook is doing
-2. Update the hostname of all the devices to match the fqdn: router01, router02, switch, server, oob-switch
+    * <span style="color:SlateBlue">**Analyse**</span> output and what the playbook is doing
+2. <span style="color:SlateBlue">**Update**</span> the hostname of all the devices to match the fqdn: router01, router02, switch, server, oob-switch
     * Make a PR to the Github repository with your playbook (be aware of identifying yourself)
-3. Contribute to improve this workshop by fixing errors, typos or promoting improvements by PRs
+3. <span style="color:SlateBlue">**Contribute**</span> to improve this workshop by fixing errors, typos or promoting improvements by PRs
 
