@@ -343,6 +343,10 @@ or just use it with templates as {{ snmp_data['stdout'][0] }}
       run_once: true
 ```
 
+## Roles
+
+TODO
+
 #
 
 ## Using 3rd-party Ansible modules

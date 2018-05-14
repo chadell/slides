@@ -28,6 +28,23 @@
 
 ![](https://media.giphy.com/media/12NUbkX6p4xOO4/giphy.gif)
 
+## RFC 1925, The Twelve Networking Truths
+
+```
+(6)  It is easier to move a problem around (for example, by moving
+    the problem to a different part of the overall network
+    architecture) than it is to solve it.
+
+    (6a) (corollary). It is always possible to add another level of
+            indirection.
+
+(11) Every old idea will be proposed again with a different name and
+    a different presentation, regardless of whether it works.
+
+    (11a) (corollary). See rule 6a.
+```
+
+
 ## Openflow
 
 ![](https://www.sdxcentral.com/wp-content/uploads/2015/03/sdn-architecture.png){ width=70% }
@@ -100,7 +117,29 @@
 
 ## Network Automation
 
-![](https://www.agileintegratedsolutions.com/wp-content/uploads/2018/01/napalm_junos_ping-1024x839.jpg){ width=70% }
+```yaml
+---
+
+- hosts: all
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: configure the login banner
+      net_banner:
+        banner: "{{ 'motd' if ansible_network_os == 'nxos' else 'login' }}"
+        text: "{{ network_banner }}"
+        state: present
+      when: network_banner is defined
+
+    - name: configure the MOTD
+      net_banner:
+        banner: motd
+        text: "{{ network_motd }}"
+        state: present
+      when: network_motd is defined and ansible_network_os != 'nxos'
+
+```
 
 ##
 
