@@ -6,13 +6,13 @@
 
 | Time | Topic |
 | --- | --- |
-| <span style="color:SlateBlue">Day 1</span> |  |
+| <span style="color:SlateBlue">**Day 1**</span> |  |
 | 15:30 - 16:00 | Network Programmability & Automation |
 | 16:00 - 16:30 | Ansible 101 |
-| 16:30 - 17:00 | <span style="color:SlateBlue">Exercise 1</span> |
-| <span style="color:SlateBlue">Day 2</span> |  |
+| 16:30 - 17:00 | <span style="color:SlateBlue">**Exercise 1**</span> |
+| <span style="color:SlateBlue">**Day 2**</span> |  |
 | 15:30 - 16:00 | Ansible 102 |
-| 16:00 - 17:00 | <span style="color:SlateBlue">Exercise 2</span> |
+| 16:00 - 17:00 | <span style="color:SlateBlue">**Exercise 2**</span> |
 
 #
 
@@ -20,14 +20,14 @@
 
 ## Core modules
 
-* command: used to send exec-level commands
+* <span style="color:SlateBlue">**command**</span>: used to send exec-level commands
     * ios_command, vyos_command, junos_command, and so on
-* config: used to send configuration commands
+* <span style="color:SlateBlue">**config**</span>: used to send configuration commands
     * ios_config, vyos_config, junos_config, and so on
-* facts: used to gather information from network devices
+* <span style="color:SlateBlue">**facts</span>: used to gather information from network devices
     * ios_facts, vyos_facts, junos_facts, and so on
 
-Note: to find out the parameters of each module (plus some examples), you can use the <span style="color:SlateBlue">ansible-doc</span> utility: $ ansible-doc ios_config
+Note: to find out the parameters of each module (plus some examples), you can use the <span style="color:SlateBlue">**ansible-doc**</span> utility: *ansible-doc ios_config*
 
 #
 
@@ -39,7 +39,7 @@ Note: to find out the parameters of each module (plus some examples), you can us
 
 ## Creating variable files (1)
 
-group_vars/barcelona-dc.yml
+**group_vars**/barcelona-dc.yml
 
 ```yaml
 ---
@@ -55,7 +55,7 @@ snmp:
 
 ## Creating variable files (2)
 
-group_vars/madrid-dc.yml
+**group_vars**/madrid-dc.yml
 
 ```yaml
 ---
@@ -68,9 +68,10 @@ snmp:
         - community: privado
           type: rw
 ```
+
 ## Creating variable files (3)
 
-group_vars/all.yml
+**group_vars**/all.yml
 
 ```yaml
 ---
@@ -82,7 +83,7 @@ base_provider:
 
 ## Creating Jinja templates (1)
 
-templates/snmp/ios.j2
+**templates**/snmp/ios.j2
 
 ```
 snmp-server location {{ snmp.location }}
@@ -94,7 +95,7 @@ snmp-server community {{ community.community }} {{ community.type | upper }}
 
 ## Creating Jinja templates (2)
 
-templates/snmp/junos.j2
+**templates**/snmp/junos.j2
 
 ```
 set snmp location {{ snmp.location }}
@@ -110,7 +111,7 @@ set snmp community {{ community.community }} authorization read-only
 
 ## Generating network configuration files (1)
 
-We will use the template module. It use the src parameter as the proper template to use and the dest paramter to point to the location where to store the rendered configuration (it assumes the folders already exist)
+We will use the **template** module. It use the **src** parameter as the proper template to use and the **dest** parameter to point to the location where to store the rendered configuration (it assumes the folders already exist)
 
 ```yaml
 # play definition omitted
@@ -131,7 +132,7 @@ $ ansible-playbook -i inventory.cfg snmp.yml
 
 What is os? and inventory_hostname?
 
-* os is a variable, so for each inventory element the task looks for the value of the os variable. It could be defined in specific files (as pointed out before), or in the inventory file with:
+* os is a **variable**, so for each inventory element the task looks for the value of the os variable. It could be defined in specific files (as pointed out before), or in the inventory file with:
 
 ```
 [eos]
@@ -142,15 +143,15 @@ eos-spine2
 os=eos
 ```
 
-* inventory_hostname is just the name of the network device from the inventory file
+* inventory_hostname is just the **name** of the network device from the **inventory** file
 
 #
 
 ## Ensuring a configuration exists
 
-1. Idempotency: make the change only when it's needed, so if you run the playbook twice without changes, it will have effect the first time
-2. Using the config module
-3. Understanding check mode, verbosity and limit
+1. **Idempotency**: make the change only when it's needed, so if you run the playbook twice without changes, it will have effect the first time
+2. Using the **config** module
+3. Understanding **check** mode, **verbosity** and **limit**
 
 ## Using the config module (1)
 
@@ -209,7 +210,7 @@ In this part we will analyse two key methods for gathering data:
 
 ## Using the core facts modules
 
-The core facts modules return the following data as JSON (so it could be used in the playbook!):
+The **core facts** module return the following data as JSON (so it could be used in the playbook!):
 
 | Core facts modules | Result |
 | --- | --- |
@@ -221,7 +222,7 @@ The core facts modules return the following data as JSON (so it could be used in
 
 ## Get fact from network devices
 
-Even by default the gather_facts provides all this information, in network devices that don't let remote python code execution (non Linux based NOS), we have to use specific modules (i.e. ios_facts:
+Even by default the **gather_facts** provides all this information, in network devices that don't let remote python code execution (non Linux based NOS), we have to use specific **facts** modules (i.e. ios_facts):
 
 ```yaml
 ---
@@ -238,7 +239,7 @@ Even by default the gather_facts provides all this information, in network devic
 
 ## Using the debug module
 
-In order to view the facts that are being returned from the module you can run the playbook in verbose mode or simply yse the debug module with the var parameter while referencing a valid facts key:
+In order to **view** the facts that are being returned from the module you can run the playbook in **verbose mode** or simply yse the **debug** module with the var parameter while referencing a valid facts key:
 
 ```yaml
 # play definition omitted
@@ -260,9 +261,7 @@ In order to view the facts that are being returned from the module you can run t
 
 ## Using data from responses
 
-To get the return data (JSON) from a module you can use the verbose mode
-
-But there is also another way, using the **register** task attribute, which allows you to save the JSON response data as a variable
+To get the return data (JSON) from a module you can use the verbose mode, but there is also another way, using the **register** task attribute, which allows you to save the JSON response data as a variable
 
 ```yaml
   - name: ISSUE SHOW COMMAND
@@ -272,6 +271,7 @@ But there is also another way, using the **register** task attribute, which allo
       provider: "{{ base_provider }}"
     register: snmp_data
 ```
+
 The register's associated value is the variable you want to save the data in
 
 ##  Access returned data
@@ -345,7 +345,28 @@ or just use it with templates as {{ snmp_data['stdout'][0] }}
 
 ## Roles
 
-TODO
+**Roles** are ways of automatically loading **certain** vars_files, tasks, and handlers based on a known file structure. Grouping content by roles also allows easy sharing of roles with other users.
+
+```
+roles/
+   common/
+     tasks/
+     templates/
+     vars/
+     defaults/
+     meta/
+   webservers/
+     tasks/
+     defaults/
+```
+
+```
+---
+- hosts: webservers
+  roles:
+     - common
+     - webservers
+```
 
 #
 
@@ -362,9 +383,9 @@ Network Automation and Programmability Abstraction Layer with Multi-vendor suppo
 
 ## NAPALM modules
 
-* Declarative configuration management (napalm_install_config): NAPALM focuses on the desired state configuration. You deploy the new configuration (no commands) and NAPALM abstracts away how this operates per vendor and makes it so you don't have to micromanage device configurations.
+* **Declarative configuration management** (napalm_install_config): NAPALM focuses on the desired state configuration. You deploy the new configuration (no commands) and NAPALM abstracts away how this operates per vendor and makes it so you don't have to micromanage device configurations.
 
-* Obtaining configuration and operational state from devices: The module napalm_get_facts is used to obtain a base set of facts and other information (usch as route entries, MAC table, etc.). The big benefit is that it the data is preparsed and normalised for all vendors supported.
+* **Obtaining configuration and operational state from devices**: The module napalm_get_facts is used to obtain a base set of facts and other information (usch as route entries, MAC table, etc.). The big benefit is that it the data is preparsed and normalised for all vendors supported.
 
 ## Bring your own module
 
@@ -396,8 +417,8 @@ All you need is here:
 1. Create a network design:
   * A vlan between router01 and router02 and configure iBGP (create all the necessary config)
   * A vlan to communicate router01, router02 and the server
+  * Everything using templating
   * A validation that the design is deployed
   * A report with all the configs applied to router01, router02 and switch
-  * Make a PR to the Github repository with your playbook (be aware of identifying yourself)
 2. Contribute to improve this workshop by fixing errors, typos or promoting improvements by PRs
 
