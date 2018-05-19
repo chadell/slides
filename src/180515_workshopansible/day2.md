@@ -12,7 +12,8 @@
 | 16:30 - 17:00 | <span style="color:SlateBlue">**Exercise 1**</span> |
 | <span style="color:SlateBlue">**Day 2**</span> |  |
 | 15:30 - 16:00 | Ansible 102 |
-| 16:00 - 17:00 | <span style="color:SlateBlue">**Exercise 2**</span> |
+| 16:00 - 16:45 | <span style="color:SlateBlue">**Exercise 2**</span> |
+| 16:45 - 17:00 | StackStorm 101 |
 
 #
 
@@ -422,3 +423,51 @@ All you need is here:
   * A report with all the configs applied to router01, router02 and switch
 2. Contribute to improve this workshop by fixing errors, typos or promoting improvements by PRs
 
+#
+
+## StackStorm: Event-Driven Automation
+
+## Use-cases
+
+## Facilitated Troubleshooting
+
+* Triggering on system failures captured by Nagios, Sensu, New Relic and other monitoring systems
+* Running a series of diagnostic checks on physical nodes, OpenStack or Amazon instances
+* Application components, and posting results to a shared communication context, like HipChat or JIRA.
+
+## Automated remediation
+
+* Identifying and verifying hardware failure on OpenStack compute node
+* Properly evacuating instances
+* Emailing admins about potential downtime, but if anything goes wrong
+* Freezing the workflow and calling PagerDuty to wake up a human.
+
+## Continuous deployment
+
+* Build and test with Jenkins, provision a new AWS cluster
+* Turn on some traffic with the load balancer
+* Roll-forward or roll-back, based on NewRelic app performance data.
+
+## ![](https://docs.stackstorm.com/_images/architecture_diagram.jpg)
+
+## Concepts (I)
+
+* **Sensors** are Python plugins for either inbound or outbound integration that receives or watches for events respectively. When an event from external systems occurs and is processed by a sensor, a StackStorm trigger will be emitted into the system.
+* **Triggers** are StackStorm representations of external events. There are generic triggers (e.g. timers, webhooks) and integration triggers (e.g. Sensu alert, JIRA issue updated). A new trigger type can be defined by writing a sensor plugin.
+
+## Concepts (II)
+* **Actions** are StackStorm outbound integrations. There are generic actions (ssh, REST call), integrations (OpenStack, Docker, Puppet), or custom actions. Actions are either Python plugins, or any scripts, consumed into StackStorm by adding a few lines of metadata. Actions can be invoked directly by user via CLI or API, or used and called as part of rules and workflows.
+
+## Concepts (III)
+
+* **Rules** map triggers to actions (or to workflows), applying matching criteria and mapping trigger payload to action inputs.
+Workflows stitch actions together into “uber-actions”, defining the order, transition conditions, and passing the data. Most automations are more than one-step and thus need more than one action. Workflows, just like “atomic” actions, are available in the Action library, and can be invoked manually or triggered by rules.
+
+## Concepts (IV)
+
+* **Packs** are the units of content deployment. They simplify the management and sharing of StackStorm pluggable content by grouping integrations (triggers and actions) and automations (rules and workflows). A growing number of packs are available on StackStorm Exchange. Users can create their own packs, share them on Github, or submit to the StackStorm Exchange.
+* **Audit** trail of action executions, manual or automated, is recorded and stored with full details of triggering context and execution results. It is also captured in audit logs for integrating with external logging and analytical tools: LogStash, Splunk, statsd, syslog.
+
+# Wrap-up
+
+![](http://www.whatnextculture.co.uk/wp-content/uploads/2015/09/WhatNext.jpg){ width=60% }

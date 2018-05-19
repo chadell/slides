@@ -14,7 +14,8 @@
 | 16:30 - 17:00 | <span style="color:SlateBlue">**Exercise 1**</span> |
 | <span style="color:SlateBlue">**Day 2**</span> |  |
 | 15:30 - 16:00 | Ansible 102 |
-| 16:00 - 17:00 | <span style="color:SlateBlue">**Exercise 2**</span> |
+| 16:00 - 16:45 | <span style="color:SlateBlue">**Exercise 2**</span> |
+| 16:45 - 17:00 | StackStorm 101 |
 
 #
 
